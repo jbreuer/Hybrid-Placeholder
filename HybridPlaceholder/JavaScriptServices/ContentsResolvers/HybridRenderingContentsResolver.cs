@@ -17,7 +17,7 @@
     {
         private readonly IRouteMapper routeMapper;
 
-        public HybridRenderingContentsResolver(IRouteMapper routeMapper)
+        protected HybridRenderingContentsResolver(IRouteMapper routeMapper)
         {
             this.routeMapper = routeMapper;
         }
@@ -54,8 +54,8 @@
         public bool UseContextItem { get; set; }
         public string ItemSelectorQuery { get; set; }
         public NameValueCollection Parameters { get; set; }
-        
-        public HttpContextBase Current
+
+        private HttpContextBase Current
         {
             get
             {
@@ -63,17 +63,17 @@
                 return httpContext == null ? null : new HttpContextWrapper(httpContext);
             }
         }
-        
-        public virtual HttpRequestBase Request => this.Current?.Request;
-        
-        public string GetQueryStringParameter(string key)
+
+        protected virtual HttpRequestBase Request => this.Current?.Request;
+
+        private string GetQueryStringParameter(string key)
         {
             return this.Request?.QueryString?.Get(key) ?? string.Empty;
         }
-        
-        public bool IsLayoutServiceRoute => routeMapper.IsLayoutServiceRoute(this.Current);
-        
-        public void SetHybridPlaceholderData(Guid uid, string placeholderName, bool useSsr)
+
+        private bool IsLayoutServiceRoute => routeMapper.IsLayoutServiceRoute(this.Current);
+
+        private void SetHybridPlaceholderData(Guid uid, string placeholderName, bool useSsr)
         {
             var hybridPlaceholderData = this.Current.Items.Contains("HybridPlaceholderData")
                 ? (Dictionary<Guid, HybridPlaceholderData>) this.Current.Items["HybridPlaceholderData"]
@@ -99,7 +99,7 @@
             this.Current.Items["HybridPlaceholderData"] = hybridPlaceholderData;
         }
 
-        public bool IsHybridPlaceholder
+        private bool IsHybridPlaceholder
         {
             get
             {

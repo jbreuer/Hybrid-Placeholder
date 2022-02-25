@@ -23,8 +23,8 @@
             args.ContextData.Add("isLayoutServiceRoute", this.IsLayoutServiceRoute);
             args.ContextData.Add("hybridPlaceholderData", this.GetHybridPlaceholderData());
         }
-        
-        public HttpContextBase Current
+
+        private HttpContextBase Current
         {
             get
             {
@@ -32,10 +32,10 @@
                 return httpContext == null ? null : new HttpContextWrapper(httpContext);
             }
         }
-        
-        public bool IsLayoutServiceRoute => routeMapper.IsLayoutServiceRoute(this.Current);
-        
-        public Dictionary<Guid, HybridPlaceholderData> GetHybridPlaceholderData()
+
+        private bool IsLayoutServiceRoute => routeMapper.IsLayoutServiceRoute(this.Current);
+
+        private Dictionary<Guid, HybridPlaceholderData> GetHybridPlaceholderData()
         {
             return this.Current.Items.Contains("HybridPlaceholderData")
                 ? (Dictionary<Guid, HybridPlaceholderData>) this.Current.Items["HybridPlaceholderData"]
