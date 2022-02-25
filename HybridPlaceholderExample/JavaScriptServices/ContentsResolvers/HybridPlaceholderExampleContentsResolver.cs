@@ -1,30 +1,44 @@
-﻿namespace HybridPlaceholderExample.JavaScriptServices.ContentsResolvers
+﻿using Sitecore.LayoutService.Mvc.Routing;
+
+namespace HybridPlaceholderExample.JavaScriptServices.ContentsResolvers
 {
     using System;
-    using System.Collections.Specialized;
+    using System.Threading;
+    using HybridPlaceholder.JavaScriptServices.ContentsResolvers;
+    using Models;
     using Sitecore.LayoutService.Configuration;
-    using Sitecore.LayoutService.ItemRendering.ContentsResolvers;
     using Sitecore.Mvc.Presentation;
 
-    public class HybridPlaceholderExampleContentsResolver : IRenderingContentsResolver
+    public class HybridPlaceholderExampleContentsResolver : HybridRenderingContentsResolver<HybridExample, object>
     {
-        public object ResolveContents(Rendering rendering, IRenderingConfiguration renderingConfig)
+        public HybridPlaceholderExampleContentsResolver(IRouteMapper routeMapper) : base(routeMapper)
         {
+        }
+
+        protected override (HybridExample content, object renderingParameters) ResolveDefaultContents(Rendering rendering,
+            IRenderingConfiguration renderingConfig)
+        {   
             var datasource = !string.IsNullOrEmpty(rendering.DataSource)
                 ? rendering.RenderingItem?.Database.GetItem(rendering.DataSource)
                 : null;
-            
-            return new
+
+            var hybridExample = new HybridExample
             {
-                name = datasource?.Name,
-                date = DateTime.Now,
-                hello = "world"
+                Hello = "World 2",
+                Name = datasource?["heading"]
             };
+            
+            return (hybridExample, null);
         }
 
-        public bool IncludeServerUrlInMediaUrls { get; set; }
-        public bool UseContextItem { get; set; }
-        public string ItemSelectorQuery { get; set; }
-        public NameValueCollection Parameters { get; set; }
+        protected override (HybridExample content, object renderingParameters) ResolveAsyncContents(HybridExample content,
+            object renderingParameters, Rendering rendering, IRenderingConfiguration renderingConfig)
+        {
+            var hybridExample = content ?? new HybridExample();
+            Thread.Sleep(1000);
+            hybridExample.Date = DateTime.Now.ToString("f");
+            
+            return (hybridExample, null);
+        }
     }
 }
