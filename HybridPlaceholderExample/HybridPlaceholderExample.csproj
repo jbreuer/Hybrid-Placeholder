@@ -160,6 +160,18 @@
     <Reference Include="Sitecore.Framework.Data.Blobs.Abstractions, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.Framework.Data.Blobs.Abstractions.1.1.0\lib\netstandard2.0\Sitecore.Framework.Data.Blobs.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.JavaScriptServices.Configuration, Version=15.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.JavaScriptServices.Configuration.15.0.0\lib\net48\Sitecore.JavaScriptServices.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.JavaScriptServices.Core, Version=15.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.JavaScriptServices.Core.15.0.0\lib\net48\Sitecore.JavaScriptServices.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.JavaScriptServices.Globalization, Version=15.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.JavaScriptServices.Globalization.15.0.0\lib\net48\Sitecore.JavaScriptServices.Globalization.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.JavaScriptServices.ViewEngine, Version=15.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.JavaScriptServices.ViewEngine.15.0.0\lib\net48\Sitecore.JavaScriptServices.ViewEngine.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Kernel, Version=15.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.Kernel.10.0.0\lib\net48\Sitecore.Kernel.dll</HintPath>
     </Reference>
