@@ -12,14 +12,15 @@
     using Sitecore.LayoutService.ItemRendering.ContentsResolvers;
     using Sitecore.LayoutService.Mvc.Routing;
     using Sitecore.Mvc.Presentation;
+    using Utils;
 
     public abstract class HybridRenderingContentsResolver<TContent, TRenderingParameters> : IRenderingContentsResolver
     {
-        private readonly IRouteMapper routeMapper;
+        private readonly ContextWrapper contextWrapper;
 
         protected HybridRenderingContentsResolver(IRouteMapper routeMapper)
         {
-            this.routeMapper = routeMapper;
+            this.contextWrapper = new ContextWrapper(routeMapper);
         }
         
         public object ResolveContents(Rendering rendering, IRenderingConfiguration renderingConfig)
@@ -28,17 +29,17 @@
             var disableHybridSsr = disableHybridSsrRenderingField != null && disableHybridSsrRenderingField.Value == "1" && !Sitecore.Context.PageMode.IsExperienceEditor;
             
             // Store the data the Hybrid Placeholder needs in the frontend.
-            this.SetHybridPlaceholderData(rendering.UniqueId, rendering.Placeholder, !disableHybridSsr);
+            this.contextWrapper.SetHybridPlaceholderData(rendering.UniqueId, rendering.Placeholder, !disableHybridSsr);
             
             var content = default(TContent);
             var renderingParameters = default(TRenderingParameters);
             
-            if (!this.IsLayoutServiceRoute || !this.IsHybridPlaceholder)
+            if (!this.contextWrapper.IsLayoutServiceRoute || !this.contextWrapper.IsHybridPlaceholder)
             {
                 // Only runs once. If it's SSR or when it's not called from the Hybrid Placeholder.
                 (content, renderingParameters) = ResolveDefaultContents(rendering, renderingConfig);
             }
-            if ((!this.IsLayoutServiceRoute && !disableHybridSsr) || this.IsHybridPlaceholder)
+            if ((!this.contextWrapper.IsLayoutServiceRoute && !disableHybridSsr) || this.contextWrapper.IsHybridPlaceholder)
             {
                 // Only runs once. If it's SSR or when the Hybrid Placeholder fetches the async data.
                 (content, renderingParameters) = ResolveAsyncContents(content, renderingParameters, rendering, renderingConfig);
@@ -55,58 +56,7 @@
         public string ItemSelectorQuery { get; set; }
         public NameValueCollection Parameters { get; set; }
 
-        private HttpContextBase Current
-        {
-            get
-            {
-                var httpContext = HttpContext.Current;
-                return httpContext == null ? null : new HttpContextWrapper(httpContext);
-            }
-        }
-
-        protected virtual HttpRequestBase Request => this.Current?.Request;
-
-        private string GetQueryStringParameter(string key)
-        {
-            return this.Request?.QueryString?.Get(key) ?? string.Empty;
-        }
-
-        private bool IsLayoutServiceRoute => routeMapper.IsLayoutServiceRoute(this.Current);
-
-        private void SetHybridPlaceholderData(Guid uid, string placeholderName, bool useSsr)
-        {
-            var hybridPlaceholderData = this.Current.Items.Contains("HybridPlaceholderData")
-                ? (Dictionary<Guid, HybridPlaceholderData>) this.Current.Items["HybridPlaceholderData"]
-                : new Dictionary<Guid, HybridPlaceholderData>();
-
-            if (hybridPlaceholderData.ContainsKey(uid))
-            {
-                hybridPlaceholderData[uid] = new HybridPlaceholderData
-                {
-                    PlaceholderName = placeholderName,
-                    UseSsr = useSsr
-                };
-            }
-            else
-            {
-                hybridPlaceholderData.Add(uid, new HybridPlaceholderData
-                {
-                    PlaceholderName = placeholderName,
-                    UseSsr = useSsr
-                });
-            }
-
-            this.Current.Items["HybridPlaceholderData"] = hybridPlaceholderData;
-        }
-
-        private bool IsHybridPlaceholder
-        {
-            get
-            {
-                bool.TryParse(this.GetQueryStringParameter("isHybridPlaceholder"), out var isHybridPlaceholder);
-                return isHybridPlaceholder;
-            }
-        }
+        
         
         protected abstract (TContent content, TRenderingParameters renderingParameters) ResolveDefaultContents(Rendering rendering, IRenderingConfiguration renderingConfig);
         
