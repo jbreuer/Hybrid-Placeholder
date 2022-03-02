@@ -334,6 +334,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Serialization\master\sitecore\templates\System\Layout\Sections\Rendering Options\Layout Service\Disable Hybrid SSR.yml" />
+    <Content Include="Serialization\master\sitecore\templates\System\Layout\Sections\Rendering Options\Layout Service\Enable Hybrid Rendering.yml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
