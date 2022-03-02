@@ -74,5 +74,14 @@
                 return isHybridPlaceholder;
             }
         }
+        
+        public bool HasHybridSsr
+        {
+            get
+            {
+                bool.TryParse(this.GetQueryStringParameter("hasHybridSsr"), out var hasHybridSsr);
+                return hasHybridSsr;
+            }
+        }
     }
 }
