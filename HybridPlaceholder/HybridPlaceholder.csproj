@@ -344,6 +344,7 @@
     <Compile Include="Models\HybridPlaceholderData.cs" />
     <Compile Include="Pipelines\PerformHybridRendering.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="UserInterface\HybridPlaceholder.jsx" />
     <Compile Include="Utils\ContextWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
