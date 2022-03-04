@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { dataApi, Placeholder, withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
+import { Placeholder, withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
 import { RestLayoutService, AxiosDataFetcher } from '@sitecore-jss/sitecore-jss';
 
 import config from './temp/config';
@@ -18,38 +18,23 @@ const HybridPlaceholder = ({
 
   const [isFetched, setIsFetched] = useState(false);
 
-const dataFetcher = (url, data) => {
-  // The url always has multiple querystring parameters. So we can just append some more.
-  url += `&isHybridPlaceholder=true&hasHybridSsr=${!isLayoutServiceRoute}&hybridLocation=${(window.location.pathname + window.location.search)}`;
-  return new AxiosDataFetcher().fetch(url, data);
-};
-
-const layoutService = new RestLayoutService({
-  apiHost: config.sitecoreApiHost,
-  apiKey: config.sitecoreApiKey,
-  siteName: config.jssAppName,
-  dataFetcherResolver: () => dataFetcher
-});
-
-const fetchPlaceholder = placeholderName => layoutService.fetchPlaceholderData(
-    placeholderName,
-    route?.itemId,
-    route?.itemLanguage
-);
-
-  const fetchPlaceholder2 = placeholderName => dataApi.fetchPlaceholderData(
-    placeholderName,
-    route?.itemId,
-    {
-      querystringParams: {
-        sc_lang: route?.itemLanguage,
-        sc_apikey: config.sitecoreApiKey,
-        isHybridPlaceholder: true,
-        hasHybridSsr: !isLayoutServiceRoute,
-        hybridLocation: (window.location.pathname + window.location.search),
-      },
-      fetcher: dataFetcher,
-    },
+  const dataFetcher = (url, data) => {
+    // The url always has multiple querystring parameters. So we can just append some more.
+    url += `&isHybridPlaceholder=true&hasHybridSsr=${!isLayoutServiceRoute}&hybridLocation=${(window.location.pathname + window.location.search)}`;
+    return new AxiosDataFetcher().fetch(url, data);
+  };
+  
+  const layoutService = new RestLayoutService({
+    apiHost: config.sitecoreApiHost,
+    apiKey: config.sitecoreApiKey,
+    siteName: config.jssAppName,
+    dataFetcherResolver: () => dataFetcher
+  });
+  
+  const fetchPlaceholder = placeholderName => layoutService.fetchPlaceholderData(
+      placeholderName,
+      route?.itemId,
+      route?.itemLanguage
   );
 
   // Check if there are any components which require the async second request
