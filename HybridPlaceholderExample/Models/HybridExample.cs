@@ -4,8 +4,9 @@
 
     public class HybridExample
     {
-        public string Name { get; set; }
+        public string Heading { get; set; }
         public string Date { get; set; }
-        public string Hello { get; set; }
+        
+        public string Text { get; set; }
     }
 }

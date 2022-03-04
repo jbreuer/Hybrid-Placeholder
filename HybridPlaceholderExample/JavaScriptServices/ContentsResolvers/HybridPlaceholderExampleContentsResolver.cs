@@ -1,12 +1,11 @@
-﻿using Sitecore.LayoutService.Mvc.Routing;
-
-namespace HybridPlaceholderExample.JavaScriptServices.ContentsResolvers
+﻿namespace HybridPlaceholderExample.JavaScriptServices.ContentsResolvers
 {
     using System;
     using System.Threading;
     using HybridPlaceholder.JavaScriptServices.ContentsResolvers;
     using Models;
     using Sitecore.LayoutService.Configuration;
+    using Sitecore.LayoutService.Mvc.Routing;
     using Sitecore.Mvc.Presentation;
 
     public class HybridPlaceholderExampleContentsResolver : HybridRenderingContentsResolver<HybridExample, object>
@@ -15,29 +14,31 @@ namespace HybridPlaceholderExample.JavaScriptServices.ContentsResolvers
         {
         }
 
-        protected override (HybridExample content, object renderingParameters) ResolveDefaultContents(Rendering rendering,
+        protected override (HybridExample content, object renderingParameters) ResolveDefaultContents(
+            Rendering rendering,
             IRenderingConfiguration renderingConfig)
-        {   
+        {
             var datasource = !string.IsNullOrEmpty(rendering.DataSource)
                 ? rendering.RenderingItem?.Database.GetItem(rendering.DataSource)
                 : null;
 
             var hybridExample = new HybridExample
             {
-                Hello = "World 2",
-                Name = datasource?["heading"]
+                Heading = datasource?["Heading"],
+                Text = datasource?["Text"]
             };
-            
+
             return (hybridExample, null);
         }
 
-        protected override (HybridExample content, object renderingParameters) ResolveAsyncContents(HybridExample content,
+        protected override (HybridExample content, object renderingParameters) ResolveAsyncContents(
+            HybridExample content,
             object renderingParameters, Rendering rendering, IRenderingConfiguration renderingConfig)
         {
             var hybridExample = content ?? new HybridExample();
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             hybridExample.Date = DateTime.Now.ToString("f");
-            
+
             return (hybridExample, null);
         }
     }
