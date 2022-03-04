@@ -18,22 +18,24 @@ const HybridPlaceholder = ({
 
   const [isFetched, setIsFetched] = useState(false);
 
-  const dataFetcher = (url, data) => {
-    return new AxiosDataFetcher().fetch(url, data);
-  };
-  
-  const layoutService = new RestLayoutService({
-    apiHost: config.sitecoreApiHost,
-    apiKey: config.sitecoreApiKey,
-    siteName: config.jssAppName,
-    dataFetcherResolver: () => dataFetcher
-  });
+const dataFetcher = (url, data) => {
+  // The url always has multiple querystring parameters. So we can just append some more.
+  url += `&isHybridPlaceholder=true&hasHybridSsr=${!isLayoutServiceRoute}&hybridLocation=${(window.location.pathname + window.location.search)}`;
+  return new AxiosDataFetcher().fetch(url, data);
+};
 
-  const fetchPlaceholder = placeholderName => layoutService.fetchPlaceholderData(
-      placeholderName,
-      route?.itemId,
-      route?.itemLanguage
-  );
+const layoutService = new RestLayoutService({
+  apiHost: config.sitecoreApiHost,
+  apiKey: config.sitecoreApiKey,
+  siteName: config.jssAppName,
+  dataFetcherResolver: () => dataFetcher
+});
+
+const fetchPlaceholder = placeholderName => layoutService.fetchPlaceholderData(
+    placeholderName,
+    route?.itemId,
+    route?.itemLanguage
+);
 
   const fetchPlaceholder2 = placeholderName => dataApi.fetchPlaceholderData(
     placeholderName,
