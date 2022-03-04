@@ -2,7 +2,6 @@
 import { dataApi, Placeholder, withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
 import { RestLayoutService, AxiosDataFetcher } from '@sitecore-jss/sitecore-jss';
 
-import { dataFetcher } from './dataFetcher';
 import config from './temp/config';
 
 const HybridPlaceholder = ({
@@ -18,23 +17,22 @@ const HybridPlaceholder = ({
   } = sitecoreContext;
 
   const [isFetched, setIsFetched] = useState(false);
+
+  const dataFetcher = (url, data) => {
+    return new AxiosDataFetcher().fetch(url, data);
+  };
   
   const layoutService = new RestLayoutService({
     apiHost: config.sitecoreApiHost,
     apiKey: config.sitecoreApiKey,
     siteName: config.jssAppName,
-    // tracking: false // if you wish to disable tracking
+    dataFetcherResolver: () => dataFetcher
   });
-
-  const fetcher = (url, data) => {
-    return new AxiosDataFetcher().fetch(url, data);
-  };
 
   const fetchPlaceholder = placeholderName => layoutService.fetchPlaceholderData(
       placeholderName,
       route?.itemId,
-      route?.itemLanguage,
-      dataFetcher
+      route?.itemLanguage
   );
 
   const fetchPlaceholder2 = placeholderName => dataApi.fetchPlaceholderData(
