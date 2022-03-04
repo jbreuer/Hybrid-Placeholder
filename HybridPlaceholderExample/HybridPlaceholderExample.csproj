@@ -315,6 +315,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Serialization\master\sitecore\system\Modules\Layout Service\Rendering Contents Resolvers\Hybrid Placeholder Example Res.yml" />
+    <Content Include="Serialization\master\sitecore\templates\Project\jss-react-sample\HybridPlaceholderExample.yml" />
+    <Content Include="Serialization\master\sitecore\templates\Project\jss-react-sample\HybridPlaceholderExample\Data.yml" />
+    <Content Include="Serialization\master\sitecore\templates\Project\jss-react-sample\HybridPlaceholderExample\Data\Heading.yml" />
+    <Content Include="Serialization\master\sitecore\templates\Project\jss-react-sample\HybridPlaceholderExample\Data\Text.yml" />
+    <Content Include="Serialization\master\sitecore\templates\Project\jss-react-sample\HybridPlaceholderExample\__Standard Values.yml" />
+    <Content Include="UserInterface\HybridPlaceholderExample.jsx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
