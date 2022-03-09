@@ -1,6 +1,6 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, {useEffect, useState} from 'react';
 import { Placeholder, withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
-import { RestLayoutService, AxiosDataFetcher } from '@sitecore-jss/sitecore-jss';
+import { AxiosDataFetcher, RestLayoutService } from '@sitecore-jss/sitecore-jss';
 
 import config from './temp/config';
 
@@ -18,10 +18,42 @@ const HybridPlaceholder = ({
 
   const [isFetched, setIsFetched] = useState(false);
 
+  const isServer = () => {
+    return !(typeof window !== 'undefined' && window.document);
+  }
+
+  const getQueryString = params => {
+    return Object.keys(params)
+        .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(String(params[k]))}`)
+        .join('&');
+  }
+
+  const resolveUrl = (urlBase, params = {}) => {
+    if (!urlBase) {
+      throw new RangeError('url must be a non-empty string');
+    }
+    
+    if (isServer()) {
+      const url = new URL(urlBase);
+      for (const key in params) {
+        if ({}.hasOwnProperty.call(params, key)) {
+          url.searchParams.append(key, String(params[key]));
+        }
+      }
+      return url.toString();
+    }
+
+    const qs = getQueryString(params);
+    return urlBase.indexOf('?') !== -1 ? `${urlBase}&${qs}` : `${urlBase}?${qs}`;
+  }
+
   const dataFetcher = (url, data) => {
-    // The url always has multiple querystring parameters. So we can just append some more.
-    url += `&isHybridPlaceholder=true&hasHybridSsr=${!isLayoutServiceRoute}&hybridLocation=${(window.location.pathname + window.location.search)}`;
-    return new AxiosDataFetcher().fetch(url, data);
+    const querystringParams = {
+        isHybridPlaceholder: true,
+        hasHybridSsr: !isLayoutServiceRoute,
+        hybridLocation: (window.location.pathname + window.location.search),
+    }
+    return new AxiosDataFetcher().fetch(resolveUrl(url, querystringParams), data);
   };
   
   const layoutService = new RestLayoutService({
