@@ -94,6 +94,7 @@ const HybridPlaceholder = ({
             }
             if (component.fields) {
               // Set isLoaded to false for components which will be fetched.
+              // eslint-disable-next-line no-param-reassign
               component.fields.isLoaded = !isLayoutServiceRoute && (hybridPlaceholderData[component.uid].useSsr ?? false);
             }
           }
@@ -111,6 +112,7 @@ const HybridPlaceholder = ({
         if (component.componentName
           && Object.prototype.hasOwnProperty.call(hybridPlaceholderData, component.uid)) {
           if (component.fields) {
+            // eslint-disable-next-line no-param-reassign
             component.fields.isLoaded = isLoaded;
           }
         }
@@ -122,8 +124,10 @@ const HybridPlaceholder = ({
   const merge = (dst, src) => {
     Object.keys(src).forEach(key => {
       if (!dst[key]) {
+        // eslint-disable-next-line no-param-reassign
         dst[key] = src[key];
       } else if (typeof src[key] === 'object' && src[key] !== null && typeof dst[key] === 'object' && dst[key] !== null) {
+        // eslint-disable-next-line no-param-reassign
         merge(dst[key], src[key]);
       }
     });
@@ -138,6 +142,7 @@ const HybridPlaceholder = ({
           if (updatedElement) {
             // Merge the properties from  updatedElement into currentElement which are not null.
             merge(currentElement, updatedElement);
+            // eslint-disable-next-line no-param-reassign
             elements[index] = currentElement;
           }
         }
@@ -162,6 +167,7 @@ const HybridPlaceholder = ({
           console.log('Hybrid Placeholder error', error);
         });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route?.itemId]);
 
   if (!isFetched) {
