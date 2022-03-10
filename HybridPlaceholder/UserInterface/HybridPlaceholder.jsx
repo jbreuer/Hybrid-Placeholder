@@ -1,4 +1,4 @@
-﻿import React, {useEffect, useState} from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { Placeholder, withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
 import { AxiosDataFetcher, RestLayoutService } from '@sitecore-jss/sitecore-jss';
 
@@ -49,6 +49,7 @@ const HybridPlaceholder = ({
   }
 
   const dataFetcher = (url, data) => {
+    // By having a custom data dataFetcher we can add extra querystring params.
     const querystringParams = {
         isHybridPlaceholder: true,
         hasHybridSsr: !isLayoutServiceRoute,
@@ -152,7 +153,7 @@ const HybridPlaceholder = ({
     }
   };
 
-  // Run this code when navigating to a new page or when the querystring changes.
+  // Run this code when navigating to a new page.
   useEffect(() => {
     // Get the current placeholder name and if we should fetch the async data in a second request.
     const { placeholderName, shouldFetch } = applyHybridPlaceholderData();
