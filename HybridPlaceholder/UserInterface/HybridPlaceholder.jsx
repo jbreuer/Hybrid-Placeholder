@@ -7,6 +7,7 @@ import config from './temp/config';
 const HybridPlaceholder = ({
   name,
   rendering,
+  useApiHost,
   sitecoreContext,
 }) => {
   const {
@@ -57,7 +58,8 @@ const HybridPlaceholder = ({
   };
   
   const layoutService = new RestLayoutService({
-    apiHost: config.sitecoreApiHost,
+    // If no apiHost is used the current domain will be used.
+    apiHost: useApiHost ? config.sitecoreApiHost : undefined,
     apiKey: config.sitecoreApiKey,
     siteName: config.jssAppName,
     dataFetcherResolver: () => dataFetcher
@@ -179,6 +181,13 @@ const HybridPlaceholder = ({
   return (
     <Placeholder name={name} rendering={rendering} />
   );
+};
+
+HybridPlaceholder.defaultProps = {
+  name: undefined,
+  rendering: undefined,
+  useApiHost: false,
+  sitecoreContext: {},
 };
 
 export default withSitecoreContext()(HybridPlaceholder);
