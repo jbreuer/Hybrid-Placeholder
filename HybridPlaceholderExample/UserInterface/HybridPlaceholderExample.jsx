@@ -7,7 +7,9 @@ const HybridPlaceholderExample = ({ fields }) => {
         text,
         isLoaded,
     } = fields;
-    isLoaded = isLoaded ?? true;
+    if (isLoaded === null || isLoaded === undefined) {
+        isLoaded = true;
+    }
     return (
         <div>
             <p>{heading}</p>

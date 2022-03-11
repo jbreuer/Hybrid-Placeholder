@@ -321,7 +321,12 @@
     <Content Include="Serialization\master\sitecore\templates\Project\jss-react-sample\HybridPlaceholderExample\Data\Heading.yml" />
     <Content Include="Serialization\master\sitecore\templates\Project\jss-react-sample\HybridPlaceholderExample\Data\Text.yml" />
     <Content Include="Serialization\master\sitecore\templates\Project\jss-react-sample\HybridPlaceholderExample\__Standard Values.yml" />
+    <Content Include="UserInterface\.npmignore" />
+    <Content Include="UserInterface\babel.config.json" />
     <Content Include="UserInterface\HybridPlaceholderExample.jsx" />
+    <Content Include="UserInterface\package-lock.json" />
+    <Content Include="UserInterface\package.json" />
+    <Content Include="UserInterface\webpack.config.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
