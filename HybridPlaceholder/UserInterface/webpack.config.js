@@ -20,4 +20,9 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  externals: {
+    "@sitecore-jss/sitecore-jss": "@sitecore-jss/sitecore-jss",
+    "@sitecore-jss/sitecore-jss-react": "@sitecore-jss/sitecore-jss-react",
+    "react": "react"
+  },
 };
