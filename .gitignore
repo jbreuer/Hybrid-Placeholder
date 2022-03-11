@@ -4,3 +4,4 @@ packages/
 .idea/
 .vs/
 node_modules/
+dist/

@@ -2,9 +2,9 @@
   "name": "hybrid-placeholder",
   "version": "1.0.0",
   "description": "With the Hybrid Placeholder it's possible to load heavy parts of a Rendering Contents Resolver later. When a user navigates to a page directly everything will be loaded (with SSR support). When a user navigates to a page using Client-Side Rendering with XHR (single page app) the data is fetched with the layout service. Than the heavy parts can be skipped and will be loaded once the page is already visible.",
-  "main": "HybridPlaceholder.jsx",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -27,5 +27,13 @@
     "@sitecore-jss/sitecore-jss": "^16.0.0",
     "@sitecore-jss/sitecore-jss-react": "^16.0.0",
     "react": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
   }
 }
