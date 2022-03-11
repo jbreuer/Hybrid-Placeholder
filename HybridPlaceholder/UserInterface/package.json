@@ -23,7 +23,7 @@
     "url": "https://github.com/jbreuer/Hybrid-Placeholder/issues"
   },
   "homepage": "https://github.com/jbreuer/Hybrid-Placeholder#readme",
-  "peerDependencies": {
+  "dependencies": {
     "@sitecore-jss/sitecore-jss": "^16.0.0",
     "@sitecore-jss/sitecore-jss-react": "^16.0.0",
     "react": "^17.0.1"

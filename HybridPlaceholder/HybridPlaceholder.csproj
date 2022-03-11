@@ -336,6 +336,7 @@
   <ItemGroup>
     <Content Include="Serialization\master\sitecore\templates\System\Layout\Sections\Rendering Options\Layout Service\Disable Hybrid SSR.yml" />
     <Content Include="Serialization\master\sitecore\templates\System\Layout\Sections\Rendering Options\Layout Service\Enable Hybrid Rendering.yml" />
+    <Content Include="UserInterface\.npmignore" />
     <Content Include="UserInterface\babel.config.json" />
     <Content Include="UserInterface\package-lock.json" />
     <Content Include="UserInterface\package.json" />
