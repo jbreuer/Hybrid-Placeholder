@@ -110,7 +110,7 @@ const HybridPlaceholder = ({
             if (component.fields) {
               // Set isLoaded to false for components which will be fetched.
               // eslint-disable-next-line no-param-reassign
-              component.fields.isLoaded = !isLayoutServiceRoute && (hybridPlaceholderData[component.uid].useSsr ?? false);
+              component.fields.isLoaded = !isLayoutServiceRoute && useSsr;
             }
           }
         });
