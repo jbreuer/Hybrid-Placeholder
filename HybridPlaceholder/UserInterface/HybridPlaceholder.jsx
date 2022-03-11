@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Placeholder, withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
 import { AxiosDataFetcher, RestLayoutService } from '@sitecore-jss/sitecore-jss';
 
@@ -17,23 +17,34 @@ const HybridPlaceholder = ({
     isLayoutServiceRoute,
   } = sitecoreContext;
 
+  let itemId;
+  let itemLanguage;
+  if (route) {
+    itemId = route.itemId;
+    itemLanguage = route.itemLanguage;
+  }
+
+  let components;
+  if (rendering
+    && rendering.placeholders
+    && rendering.placeholders[name]) {
+    // Get all the components of the current placeholder.
+    components = rendering.placeholders[name];
+  }
+
   const [isFetched, setIsFetched] = useState(false);
 
-  const isServer = () => {
-    return !(typeof window !== 'undefined' && window.document);
-  }
+  const isServer = () => !(typeof window !== 'undefined' && window.document);
 
-  const getQueryString = params => {
-    return Object.keys(params)
-        .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(String(params[k]))}`)
-        .join('&');
-  }
+  const getQueryString = params => Object.keys(params)
+    .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(String(params[k]))}`)
+    .join('&');
 
   const resolveUrl = (urlBase, params = {}) => {
     if (!urlBase) {
       throw new RangeError('url must be a non-empty string');
     }
-    
+
     if (isServer()) {
       const url = new URL(urlBase);
       for (const key in params) {
@@ -46,30 +57,30 @@ const HybridPlaceholder = ({
 
     const qs = getQueryString(params);
     return urlBase.indexOf('?') !== -1 ? `${urlBase}&${qs}` : `${urlBase}?${qs}`;
-  }
+  };
 
   const dataFetcher = (url, data) => {
     // By having a custom data dataFetcher we can add extra querystring params.
     const querystringParams = {
-        isHybridPlaceholder: true,
-        hasHybridSsr: !isLayoutServiceRoute,
-        hybridLocation: (window.location.pathname + window.location.search),
-    }
+      isHybridPlaceholder: true,
+      hasHybridSsr: !isLayoutServiceRoute,
+      hybridLocation: (window.location.pathname + window.location.search),
+    };
     return new AxiosDataFetcher().fetch(resolveUrl(url, querystringParams), data);
   };
-  
+
   const layoutService = new RestLayoutService({
     // If no apiHost is used the current domain will be used.
     apiHost: useApiHost ? config.sitecoreApiHost : undefined,
     apiKey: config.sitecoreApiKey,
     siteName: config.jssAppName,
-    dataFetcherResolver: () => dataFetcher
+    dataFetcherResolver: () => dataFetcher,
   });
-  
+
   const fetchPlaceholder = placeholderName => layoutService.fetchPlaceholderData(
-      placeholderName,
-      route?.itemId,
-      route?.itemLanguage
+    placeholderName,
+    itemId,
+    itemLanguage,
   );
 
   // Check if there are any components which require the async second request
@@ -80,10 +91,7 @@ const HybridPlaceholder = ({
     let shouldFetch = false;
     if (!pageEditing
       && hybridPlaceholderData
-      && Object.keys(hybridPlaceholderData).length !== 0
-      && rendering?.placeholders?.[name]) {
-      // Get all the components of the current placeholder.
-      const components = rendering?.placeholders?.[name];
+      && Object.keys(hybridPlaceholderData).length !== 0) {
       if (Array.isArray(components)) {
         components.forEach(component => {
           // Check if the component has Hybrid Placeholder data.
@@ -91,7 +99,11 @@ const HybridPlaceholder = ({
             && Object.prototype.hasOwnProperty.call(hybridPlaceholderData, component.uid)) {
             // Get the name of the placeholder which should be fetched.
             placeholderName = hybridPlaceholderData[component.uid].placeholderName;
-            if (isLayoutServiceRoute || !(hybridPlaceholderData[component.uid].useSsr ?? false)) {
+            let { useSsr } = hybridPlaceholderData[component.uid];
+            if (useSsr === null || useSsr === undefined) {
+              useSsr = false;
+            }
+            if (isLayoutServiceRoute || !useSsr) {
               // Only set shouldFetch to true if it's a isLayoutServiceRoute or if useSsr is false.
               shouldFetch = true;
             }
@@ -109,7 +121,6 @@ const HybridPlaceholder = ({
 
   // Update the isLoaded property for each component which uses the Hybrid Placeholder.
   const setIsLoaded = isLoaded => {
-    const components = rendering?.placeholders?.[name];
     if (Array.isArray(components)) {
       components.forEach(component => {
         if (component.componentName
@@ -141,7 +152,7 @@ const HybridPlaceholder = ({
     if (Array.isArray(currentElements) && Array.isArray(updatedElements)) {
       currentElements.forEach((currentElement, index, elements) => {
         if (currentElement) {
-          const updatedElement = updatedElements.find(element => element?.uid === currentElement?.uid);
+          const updatedElement = updatedElements.find(element => (element && element.uid === currentElement.uid));
           if (updatedElement) {
             // Merge the properties from  updatedElement into currentElement which are not null.
             merge(currentElement, updatedElement);
@@ -163,15 +174,15 @@ const HybridPlaceholder = ({
       fetchPlaceholder(placeholderName)
         .then(result => {
           // Merge the async data from the second request with the data fetched in the first request.
-          updateElements(rendering.placeholders[name], result.elements);
+          updateElements(components, result.elements);
           setIsLoaded(true);
           setIsFetched(true);
         }).catch(error => {
           console.log('Hybrid Placeholder error', error);
         });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [route?.itemId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemId]);
 
   if (!isFetched) {
     // Check which components will execute the async second request.
