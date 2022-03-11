@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Placeholder, withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
 import { AxiosDataFetcher, RestLayoutService } from '@sitecore-jss/sitecore-jss';
 
-import config from './temp/config';
-
 const HybridPlaceholder = ({
   name,
   rendering,
+  config,
   useApiHost,
   sitecoreContext,
 }) => {
@@ -198,6 +197,7 @@ const HybridPlaceholder = ({
 HybridPlaceholder.defaultProps = {
   name: undefined,
   rendering: undefined,
+  config: {},
   useApiHost: false,
   sitecoreContext: {},
 };
