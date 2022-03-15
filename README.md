@@ -21,7 +21,7 @@ There is an example package which can be added:
 5. In Sitecore add the component to the placeholder settings.
 6. Create a new component which uses the HybridPlaceholderExample rendering.
 
-## Using the Hybrid Placholder
+## Using the Hybrid Placeholder
 1. Make sure the component is added to ```<HybridPlaceholder name="" rendering={rendering} config={config} />``` instead of ```<Placeholder name="" rendering={rendering} />```.
 2. Let the Rendering Contents Resolver inherit from HybridRenderingContentsResolver. You can build your model in ResolveDefaultContents and ResolveAsyncContents. During SSR both will be called. When using using Client-Side Rendering with XHR first only ResolveDefaultContents is executed and ResolveAsyncContents will be executed async in a second request. So both only run once. The Hybrid Placeholder will get the JSON from the first and second request and merge them. Only null values from the first request will be overriden with values from the second request.
 
