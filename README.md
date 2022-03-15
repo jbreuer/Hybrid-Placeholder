@@ -10,7 +10,7 @@ You can watch a getting started video here: https://youtu.be/-8k7jzuRk9U
 You can follow these steps to only install the Hybrid Placeholder:
 1. Install [Hybrid Placeholder-1.0.zip](./SitecorePackages/Hybrid%20Placeholder-1.0.zip) in your Sitecore solution. Tested on Sitecore 10.1 and 10.2.
 2. Run ```npm i hybrid-placeholder@19.0.2``` in your React app. Make sure the version matches the [@sitecore-jss/sitecore-jss-react](https://www.npmjs.com/package/@sitecore-jss/sitecore-jss-react) version you're using.
-3. Follow the [Using the Hybrid Placholder](#using-the-hybrid-placeholder) section below.
+3. Follow the [Using the Hybrid Placeholder](#using-the-hybrid-placeholder) section below.
 
 There is an example package which can be added:
 
