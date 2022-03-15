@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
-  entry: './HybridPlaceholder.jsx',
+  entry: '../../../HybridPlaceholder/UserInterface/HybridPlaceholder.jsx',
   output: {
     path: path.resolve('dist'),
     filename: 'index.js',
