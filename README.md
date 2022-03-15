@@ -2,7 +2,26 @@
 
 With the Hybrid Placeholder it's possible to load heavy parts of a Rendering Contents Resolver later. When a user navigates to a page directly everything will be loaded (with SSR support). When a user navigates to a page using Client-Side Rendering with XHR (single page app) the data is fetched with the layout service. Than the heavy parts can be skipped and will be loaded once the page is already visible. 
 
-## Example
+## Installing
+You can watch a getting started video here: https://youtu.be/-8k7jzuRk9U
+
+<a href="https://youtu.be/-8k7jzuRk9U" target="_blank"><img src="./GettingStarted.png" height="250"></a>
+
+You can follow these steps to only install the Hybrid Placeholder:
+1. Install [Hybrid Placeholder-1.0.zip](./SitecorePackages/Hybrid%20Placeholder-1.0.zip) in your Sitecore solution. Tested on Sitecore 10.1 and 10.2.
+2. Run npm i hybrid-placeholder@19.0.2 in your React app. Make sure the version matches the [@sitecore-jss/sitecore-jss-react](https://www.npmjs.com/package/@sitecore-jss/sitecore-jss-react) version you're using.
+3. Follow the [Using the Hybrid Placholder](#using-the-hybrid-placholder) section below.
+
+There is an example package which can be added:
+
+1. Install [Hybrid Placeholder example-1.0.zip](./SitecorePackages/Hybrid%20Placeholder%20example-1.0.zip) in your Sitecore solution.
+2. Run npm i hybrid-placeholder-example@19.0.2 in your React app.
+3. Create a React component which exports the HybridPlaceholderExample component.
+4. Deploy the jss app.
+5. In Sitecore add the component to the placeholder settings.
+6. Create a new component which uses the HybridPlaceholderExample rendering.
+
+## Using the Hybrid Placholder
 1. Make sure the component is added to ```<HybridPlaceholder name="" rendering={rendering} />``` instead of ```<Placeholder name="" rendering={rendering} />```.
 2. Let the Rendering Contents Resolver inherit from HybridRenderingContentsResolver. You can build your model in ResolveDefaultContents and ResolveAsyncContents. During SSR both will be called. When using using Client-Side Rendering with XHR first only ResolveDefaultContents is executed and ResolveAsyncContents will be executed async in a second request. So both only run once. The Hybrid Placeholder will get the JSON from the first and second request and merge them. Only null values from the first request will be overriden with values from the second request.
 
