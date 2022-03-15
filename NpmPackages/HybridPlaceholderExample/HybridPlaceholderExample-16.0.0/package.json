@@ -1,6 +1,6 @@
 {
   "name": "hybrid-placeholder-example",
-  "version": "1.0.1",
+  "version": "16.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -25,9 +25,9 @@
   },
   "homepage": "https://github.com/jbreuer/Hybrid-Placeholder#readme",
   "peerDependencies": {
-    "@sitecore-jss/sitecore-jss": "^19.0.2",
-    "@sitecore-jss/sitecore-jss-react": "^19.0.2",
-    "react": "^17.0.2"
+    "@sitecore-jss/sitecore-jss": "^16.0.0",
+    "@sitecore-jss/sitecore-jss-react": "^16.0.0",
+    "react": "^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
