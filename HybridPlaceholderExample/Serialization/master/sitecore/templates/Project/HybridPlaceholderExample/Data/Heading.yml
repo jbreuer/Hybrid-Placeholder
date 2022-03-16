@@ -1,20 +1,28 @@
 ---
-ID: "118ae28a-5a94-4183-9a0c-945c9d1b2ad0"
+ID: "bd7ad68f-affb-51d4-8fd0-b838d907415b"
 Parent: "3d4b4e00-8e46-5ea7-88f8-cecc2c75ae2c"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
-Path: "/sitecore/templates/Project/jss-react-sample/HybridPlaceholderExample/Data/Text"
+Path: /sitecore/templates/Project/HybridPlaceholderExample/Data/Heading
 DB: master
 SharedFields:
+- ID: "39847666-389d-409b-95bd-f2016f11eed5"
+  Hint: Unversioned
+  Type: Checkbox
+  Value: 0
 - ID: "9c6106ea-7a5a-48e2-8cad-f0f693b1e2d4"
   Hint: __Read Only
   Type: Checkbox
   Value: 1
 - ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
   Hint: Type
-  Value: Rich Text
+  Value: "Single-Line Text"
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 200
+  Value: 100
+- ID: "be351a73-fcb0-4213-93fa-c302d8ab4f51"
+  Hint: Shared
+  Type: Checkbox
+  Value: 0
 Languages:
 - Language: en
   Versions:
@@ -22,10 +30,18 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20220304T132307Z
+      Value: 20220304T091759Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\JssImport
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\JssImport
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "28c8387d-3d17-4d3e-a214-ab61757a3ce3"
+      Value: "b9534f82-af56-475a-91ec-1d3b0033a7d5"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |

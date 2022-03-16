@@ -1,13 +1,20 @@
 ---
-ID: "e6253e1f-200f-5360-a68d-b32aa1968f68"
-Parent: "ea85193d-a90c-508f-a855-a41e2e3f4f52"
-Template: "ea85193d-a90c-508f-a855-a41e2e3f4f52"
-Path: "/sitecore/templates/Project/jss-react-sample/HybridPlaceholderExample/__Standard Values"
+ID: "ea85193d-a90c-508f-a855-a41e2e3f4f52"
+Parent: "825b30b4-b40b-422e-9920-23a1b6bda89c"
+Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
+Path: /sitecore/templates/Project/HybridPlaceholderExample
 DB: master
 SharedFields:
-- ID: "ca9b9f52-4fb0-4f87-a79f-24dea62cda65"
-  Hint: __Default workflow
-  Value: "{6C59AE29-D0A1-4B77-9305-0ABAB21D5FE5}"
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Office/16x16/document_tag.png
+- ID: "9c6106ea-7a5a-48e2-8cad-f0f693b1e2d4"
+  Hint: __Read Only
+  Type: Checkbox
+  Value: 0
+- ID: "f7d48a55-2158-4f02-9356-756654404f73"
+  Hint: __Standard values
+  Value: "{E6253E1F-200F-5360-A68D-B32AA1968F68}"
 Languages:
 - Language: en
   Versions:
@@ -26,11 +33,11 @@ Languages:
         sitecore\JssImport
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "db519da4-cd1f-4317-9ba8-7836be7f7f9d"
+      Value: "31ac3918-1c20-4909-9db0-ef43302056d5"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\JssImport
+        sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20220304T091759Z
+      Value: 20220314T095418Z
