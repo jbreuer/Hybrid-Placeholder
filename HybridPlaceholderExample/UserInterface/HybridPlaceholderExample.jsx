@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text, RichText } from '@sitecore-jss/sitecore-jss-react';
 
 const HybridPlaceholderExample = ({ fields }) => {
     let {
@@ -12,14 +13,14 @@ const HybridPlaceholderExample = ({ fields }) => {
     }
     return (
         <div>
-            <p>{heading}</p>
+            <p><Text field={heading} /></p>
             {isLoaded && (
                 <p>{date}</p>
             )}
             {!isLoaded && (
                 <p>Loading...</p>
             )}
-            <div dangerouslySetInnerHTML={{__html: text}} />
+            <RichText field={text} />
         </div>
     )};
 

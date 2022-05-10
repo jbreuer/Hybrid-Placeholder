@@ -14,7 +14,7 @@
     using Sitecore.Mvc.Presentation;
     using Utils;
 
-    public abstract class HybridRenderingContentsResolver<TContent, TRenderingParameters> : IRenderingContentsResolver
+    public abstract class HybridRenderingContentsResolver<TContent, TRenderingParameters> : RenderingContentsResolver
     {
         private readonly ContextWrapper contextWrapper;
 
@@ -23,7 +23,7 @@
             this.contextWrapper = new ContextWrapper(routeMapper);
         }
         
-        public object ResolveContents(Rendering rendering, IRenderingConfiguration renderingConfig)
+        public override object ResolveContents(Rendering rendering, IRenderingConfiguration renderingConfig)
         {
             var disableHybridSsrRenderingField = rendering.RenderingItem?.InnerItem?.Fields["Disable Hybrid SSR"];
             var disableHybridSsr = disableHybridSsrRenderingField != null && disableHybridSsrRenderingField.Value == "1" && !Sitecore.Context.PageMode.IsExperienceEditor;
@@ -50,13 +50,6 @@
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             });
         }
-
-        public bool IncludeServerUrlInMediaUrls { get; set; }
-        public bool UseContextItem { get; set; }
-        public string ItemSelectorQuery { get; set; }
-        public NameValueCollection Parameters { get; set; }
-
-        
         
         protected abstract (TContent content, TRenderingParameters renderingParameters) ResolveDefaultContents(Rendering rendering, IRenderingConfiguration renderingConfig);
         

@@ -22,10 +22,12 @@
                 ? rendering.RenderingItem?.Database.GetItem(rendering.DataSource)
                 : null;
 
+            var processedItem = base.ProcessItem(datasource, rendering, renderingConfig);
+
             var hybridExample = new HybridExample
             {
-                Heading = datasource?["Heading"],
-                Text = datasource?["Text"]
+                Heading = processedItem?["Heading"],
+                Text = processedItem?["Text"]
             };
 
             return (hybridExample, null);

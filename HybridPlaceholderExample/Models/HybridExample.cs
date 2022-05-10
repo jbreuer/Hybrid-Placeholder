@@ -1,12 +1,13 @@
 ﻿namespace HybridPlaceholderExample.Models
 {
     using System;
+    using Newtonsoft.Json.Linq;
 
     public class HybridExample
     {
-        public string Heading { get; set; }
+        public JToken Heading { get; set; }
         public string Date { get; set; }
         
-        public string Text { get; set; }
+        public JToken Text { get; set; }
     }
 }
