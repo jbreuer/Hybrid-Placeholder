@@ -8,14 +8,14 @@ You can watch a getting started video here: https://youtu.be/-8k7jzuRk9U
 <a href="https://youtu.be/-8k7jzuRk9U" target="_blank"><img src="./GettingStarted.png" height="250"></a>
 
 You can follow these steps to only install the Hybrid Placeholder:
-1. Install [Hybrid Placeholder-1.0.zip](./SitecorePackages/Hybrid%20Placeholder-1.0.zip) in your Sitecore solution. Tested on Sitecore 10.1 and 10.2.
-2. Run ```npm i hybrid-placeholder@19.0.2``` in your React app. Make sure the version matches the [@sitecore-jss/sitecore-jss-react](https://www.npmjs.com/package/@sitecore-jss/sitecore-jss-react) version you're using.
+1. Install [Hybrid Placeholder-1.1.zip](./SitecorePackages/Hybrid%20Placeholder-1.1.zip) in your Sitecore solution. Tested on Sitecore 10.1 and 10.2.
+2. Run ```npm i hybrid-placeholder-jss@20.0.1``` in your React app. Make sure the version matches the [@sitecore-jss/sitecore-jss-react](https://www.npmjs.com/package/@sitecore-jss/sitecore-jss-react) version you're using.
 3. Follow the [Using the Hybrid Placeholder](#using-the-hybrid-placeholder) section below.
 
 There is an example package which can be added:
 
-1. Install [Hybrid Placeholder example-1.0.zip](./SitecorePackages/Hybrid%20Placeholder%20example-1.0.zip) in your Sitecore solution.
-2. Run ```npm i hybrid-placeholder-example@19.0.2``` in your React app.
+1. Install [Hybrid Placeholder example-1.1.zip](./SitecorePackages/Hybrid%20Placeholder%20example-1.1.zip) in your Sitecore solution.
+2. Run ```npm i hybrid-placeholder-jss-example@20.0.1``` in your React app.
 3. Create a React component which exports the HybridPlaceholderExample component.
 4. Deploy the jss app.
 5. In Sitecore add the component to the placeholder settings.
@@ -47,10 +47,12 @@ public class HybridPlaceholderExampleContentsResolver : HybridRenderingContentsR
             ? rendering.RenderingItem?.Database.GetItem(rendering.DataSource)
             : null;
 
+        var processedItem = base.ProcessItem(datasource, rendering, renderingConfig);
+
         var hybridExample = new HybridExample
         {
-            Heading = datasource?["Heading"],
-            Text = datasource?["Text"]
+            Heading = processedItem?["Heading"],
+            Text = processedItem?["Text"]
         };
 
         return (hybridExample, null);
@@ -66,6 +68,7 @@ public class HybridPlaceholderExampleContentsResolver : HybridRenderingContentsR
 
         return (hybridExample, null);
     }
+}
 }
 ```
 
