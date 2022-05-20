@@ -1,5 +1,5 @@
 {
-  "name": "hybrid-placeholder",
+  "name": "hybrid-placeholder-jss",
   "version": "16.0.0",
   "description": "With the Hybrid Placeholder it's possible to load heavy parts of a Rendering Contents Resolver later. When a user navigates to a page directly everything will be loaded (with SSR support). When a user navigates to a page using Client-Side Rendering with XHR (single page app) the data is fetched with the layout service. Than the heavy parts can be skipped and will be loaded once the page is already visible.",
   "main": "dist/index.js",

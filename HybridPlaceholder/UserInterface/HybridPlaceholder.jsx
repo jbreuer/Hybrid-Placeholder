@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Placeholder, withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
-import { AxiosDataFetcher, RestLayoutService } from '@sitecore-jss/sitecore-jss';
+import { AxiosDataFetcher } from '@sitecore-jss/sitecore-jss';
+import { RestLayoutService } from '@sitecore-jss/sitecore-jss/layout';
 
 const HybridPlaceholder = ({
   name,

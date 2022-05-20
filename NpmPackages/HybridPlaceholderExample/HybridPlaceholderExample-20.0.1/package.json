@@ -1,6 +1,6 @@
 {
   "name": "hybrid-placeholder-jss-example",
-  "version": "19.0.2",
+  "version": "20.0.1",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -25,15 +25,15 @@
   },
   "homepage": "https://github.com/jbreuer/Hybrid-Placeholder#readme",
   "peerDependencies": {
-    "@sitecore-jss/sitecore-jss": "^19.0.2",
-    "@sitecore-jss/sitecore-jss-react": "^19.0.2",
+    "@sitecore-jss/sitecore-jss": "^20.0.1",
+    "@sitecore-jss/sitecore-jss-react": "^20.0.1",
     "react": "^17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@babel/preset-react": "^7.16.7",
-    "@sitecore-jss/sitecore-jss": "^19.0.2",
-    "@sitecore-jss/sitecore-jss-react": "^19.0.2",
+    "@sitecore-jss/sitecore-jss": "^20.0.1",
+    "@sitecore-jss/sitecore-jss-react": "^20.0.1",
     "babel-loader": "^8.2.3",
     "babel-preset-react": "^6.24.1",
     "react": "^17.0.2",
